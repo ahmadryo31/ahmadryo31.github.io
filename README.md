@@ -1,25 +1,19 @@
 # Ryo personal site
 
-Arabic, right-to-left personal site with profile, games, and anime sections.
+Arabic RTL personal site. Open index.html through a static server or download preview.html for an embedded offline copy.
 
-## Preview
-Download `preview.html` and open it in a browser. It is a self-contained copy with the existing supplied images embedded; no server is needed.
-The production entry point is `index.html`, alongside `styles.css`, `app.js`, and `assets/`.
+## Latest changes
+- Removed the decorative dot from Ryo while preserving the name.
+- Reused the supplied Ryo portrait for the favicon and the games/anime headings.
+- Removed the two old profile banners.
+- Added One Piece and Vinland Saga as text cards; six anime entries total.
+- Preserved the blue-white design, right navigation, existing anime posters and game links.
 
-## Accounts
-Set confirmed usernames and HTTPS profile URLs in the `profiles` array in `app.js`.
-Missing URLs are shown as non-interactive labels. Discord copy appears only after a username is supplied.
-
-## Navigation
-Sections use `#profiles`, `#games`, and `#anime`; refresh and browser history preserve the selected section.
-The right sidebar becomes a toggleable drawer below 800px.
-Reduced-motion preferences are respected automatically.
-
-## Assets
-Existing profile, banner, and anime images are preserved. Original supplied images are small; higher-resolution originals are still needed.
-New game cover downloads were not permitted by automatic approval review; game cards use typography and verified official source links instead.
+## Still pending
+- New One Piece and Vinland Saga posters and replacement Ryo artwork must be supplied before image integration is complete.
+- Profile URLs are not supplied; no guessed account links are used.
+- No custom domain has been purchased or configured. ahmad-ryo.com is a possible spelling only; availability is unverified. Domain hostnames cannot use underscores.
+- No deployment or merge into main has been performed.
 
 ## Validation
-JavaScript syntax, local assets, HTML IDs/anchors, checked.
-Browser rendering was not verified: this environment does not offer a compatible supervised preview for plain static projects.
-The redesign is prepared for review; it has not been deployed.
+JavaScript syntax, local asset references, unique IDs, section anchors, and anime count checked. Browser appearance has not been tested.
