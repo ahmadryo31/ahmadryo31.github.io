@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#eaf8ff">
+<title>Ryo — Personal Site</title>
+<style>
+:root {
+  --bg:#eaf8ff;
+  --bg2:#cfeeff;
+  --white:#ffffff;
+  --blue:#59baff;
+  --blue2:#248fd7;
+  --text:#17324a;
+  --muted:#688399;
+  --line:rgba(51,145,201,.22);
+  --shadow:0 18px 50px rgba(68,146,194,.15);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 5%,rgba(255,255,255,.95),transparent 25%),
+    radial-gradient(circle at 88% 12%,rgba(118,205,255,.38),transparent 28%),
+    linear-gradient(145deg,#fbfeff,var(--bg) 48%,#f4fbff);
+  overflow-x:hidden;
+}
+body.calm *{animation:none!important;transition:none!important}
+.particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.particles img{
+  position:absolute;width:52px;opacity:.14;image-rendering:pixelated;
+  animation:float 11s linear infinite;filter:drop-shadow(0 8px 16px rgba(57,136,184,.12))
+}
+.particles img:nth-child(1){left:5%;top:82%;animation-delay:-2s}
+.particles img:nth-child(2){left:18%;top:22%;animation-delay:-7s;width:43px}
+.particles img:nth-child(3){left:34%;top:72%;animation-delay:-1s}
+.particles img:nth-child(4){left:50%;top:34%;animation-delay:-6s;width:44px}
+.particles img:nth-child(5){left:66%;top:80%;animation-delay:-4s}
+.particles img:nth-child(6){left:78%;top:27%;animation-delay:-9s;width:44px}
+.particles img:nth-child(7){left:89%;top:63%;animation-delay:-5s}
+.particles img:nth-child(8){left:94%;top:12%;animation-delay:-3s;width:42px}
+@keyframes float{
+  0%{transform:translateY(25px);opacity:.04}
+  50%{opacity:.16}
+  100%{transform:translateY(-150px);opacity:0}
+}
+.wrap{width:min(1120px,94%);margin:auto}
+nav{
+  position:sticky;top:12px;z-index:50;margin-top:14px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 18px;border:1px solid var(--line);border-radius:22px;
+  background:rgba(255,255,255,.86);backdrop-filter:blur(18px);
+  box-shadow:0 10px 30px rgba(69,150,200,.11)
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:950}
+.logo{
+  width:48px;height:48px;border-radius:16px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:1000;
+  box-shadow:0 10px 22px rgba(36,143,215,.22);font-size:28px
+}
+.brand small{display:block;color:var(--muted);font-size:13px;font-weight:700}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:26px;padding:38px 0}
+.sidebar{
+  position:sticky;top:94px;height:max-content;
+  padding:16px;border:1px solid var(--line);border-radius:24px;
+  background:rgba(255,255,255,.78);box-shadow:var(--shadow)
+}
+.sidebar h3{margin:0 0 12px;font-size:18px}
+.side-btn,.motion-btn{
+  width:100%;display:block;text-align:right;margin:8px 0;padding:12px 14px;
+  border:1px solid transparent;border-radius:14px;background:transparent;
+  color:var(--text);font-weight:850;cursor:pointer;transition:.2s
+}
+.side-btn:hover,.side-btn.active,.motion-btn:hover{background:#e1f5ff;color:var(--blue2);border-color:var(--line)}
+.content{min-width:0}
+.page{display:none;animation:fade .25s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.hero{padding:8px 0 28px}
+.hero h1{
+  font-size:clamp(54px,9vw,96px);line-height:.95;margin:0 0 16px;
+  background:linear-gradient(90deg,#238ed8,#66c5ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero p{color:var(--muted);font-size:18px;line-height:1.9;max-width:700px;margin:0 0 24px}
+.portrait-card{
+  width:min(390px,88%);padding:14px;border-radius:34px;
+  border:1px solid var(--line);background:rgba(255,255,255,.88);box-shadow:var(--shadow)
+}
+.portrait{position:relative;width:100%;aspect-ratio:4/5;border-radius:25px;overflow:hidden;background:var(--bg2)}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
+
+.section-title{font-size:34px;margin:0 0 18px}
+.cards{display:grid;grid-template-columns:1fr;gap:14px}
+.card{
+  position:relative;overflow:hidden;padding:20px;border-radius:24px;
+  border:1px solid var(--line);background:rgba(255,255,255,.86);
+  box-shadow:var(--shadow);transition:.22s
+}
+.card:hover{transform:translateY(-3px)}
+.card h3{margin:0 0 7px;font-size:22px}
+.card p{margin:0;color:var(--muted);line-height:1.7}
+.profile-card{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.profile-card .icon{
+  width:46px;height:46px;border-radius:15px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#d9f3ff,#fff);border:1px solid var(--line);
+  font-weight:1000;color:var(--blue2)
+}
+.profile-card a{color:var(--blue2);text-decoration:none;font-weight:850}
+.tag{
+  display:inline-block;margin-top:10px;padding:6px 9px;border-radius:999px;
+  background:#e5f6ff;border:1px solid var(--line);color:var(--blue2);font-size:13px;font-weight:800
+}
+.anime-card{
+  display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px;align-items:center;
+}
+.anime-poster{
+  width:150px;height:220px;border-radius:18px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.06);box-shadow:0 14px 30px rgba(0,0,0,.08);background:#fff
+}
+.anime-poster img{width:100%;height:100%;display:block;object-fit:cover}
+.note{margin:0 0 20px;color:var(--muted);line-height:1.8}
+
+.showcase-title{
+  font-size:28px;
+  margin:4px 0 16px;
+}
+.showcase-note{
+  margin:0 0 18px;
+  color:var(--muted);
+  line-height:1.8;
+}
+.showcase-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+  margin:18px 0 30px;
+}
+.showcase-card{
+  width:min(100%, 760px);
+  overflow:hidden;
+  border-radius:26px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.88);
+  box-shadow:var(--shadow);
+}
+.showcase-card:first-child{
+  justify-self:start;
+}
+.showcase-card:last-child{
+  justify-self:end;
+}
+.showcase-card img{
+  width:100%;
+  display:block;
+  object-fit:cover;
+}
+
+footer{
+  margin:12px 0 26px;padding:20px 2px;border-top:1px solid var(--line);
+  color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap
+}
+@media(max-width:800px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static;order:-1}
+}
+@media(max-width:620px){
+  .anime-card{grid-template-columns:1fr}
+  .anime-poster{width:100%;max-width:220px;height:320px}
+  .showcase-card,
+  .showcase-card:first-child,
+  .showcase-card:last-child{
+    width:100%;
+    justify-self:stretch;
+  }
+}
+</style>
+</head>
+<body>
+<div class="particles" aria-hidden="true">
+  <img src="assets/asset_01.webp" alt=""><img src="assets/asset_01.webp" alt=""><img src="assets/asset_01.webp" alt=""><img src="assets/asset_01.webp" alt=""><img src="assets/asset_01.webp" alt=""><img src="assets/asset_01.webp" alt=""><img src="assets/asset_01.webp" alt=""><img src="assets/asset_01.webp" alt="">
+</div>
+
+<div class="wrap">
+  <nav>
+    <div class="brand">
+      <div class="logo">R</div>
+      <div>
+        <div style="font-size:34px; font-weight:1000; line-height:1;">RYO</div>
+        <small>Personal site</small>
+      </div>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <main class="content">
+      <section id="profiles" class="page active">
+        <div class="hero">
+          <h1>Ryo.</h1>
+          <p>صفحتي الشخصية — كل شيء موجود هنا في رابط واحد: بروفايلاتي، الألعاب اللي لعبتها، والأنميات اللي شفتها.</p>
+          <div class="portrait-card">
+            <div class="portrait"><img src="assets/asset_02.webp" alt="Ryo anime profile"></div>
+          </div>
+        </div>
+
+
+        <h2 class="showcase-title">بنرات / صور مميزة</h2>
+        <p class="showcase-note">حطّيت الصورتين بمكان مناسب داخل الصفحة الرئيسية كمعرض بسيط.</p>
+        <div class="showcase-grid">
+          <div class="showcase-card">
+            <img src="assets/asset_03.webp" alt="Ryo featured banner 1">
+          </div>
+          <div class="showcase-card">
+            <img src="assets/asset_04.webp" alt="Ryo featured banner 2">
+          </div>
+        </div>
+
+        <h2 class="section-title">بروفايلاتي</h2>
+        <div class="cards">
+          <div class="card profile-card">
+            <div><h3>Discord</h3><p>@your_username</p><a href="#">فتح الحساب</a></div>
+            <div class="icon">D</div>
+          </div>
+          <div class="card profile-card">
+            <div><h3>Instagram</h3><p>@your_username</p><a href="#">فتح الحساب</a></div>
+            <div class="icon">I</div>
+          </div>
+          <div class="card profile-card">
+            <div><h3>Steam</h3><p>Ryo</p><a href="#">فتح الحساب</a></div>
+            <div class="icon">S</div>
+          </div>
+          <div class="card profile-card">
+            <div><h3>Roblox</h3><p>Ryo</p><a href="#">فتح الحساب</a></div>
+            <div class="icon">R</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="games" class="page">
+        <h2 class="section-title">الألعاب اللي لعبتها 🎮</h2>
+        <p class="note">قسم مخصص للألعاب اللي لعبتها أو ما زلت تلعبها.</p>
+        <div class="cards">
+          <div class="card"><h3>Blox Fruits</h3><p>Roblox</p><span class="tag">ألعبها</span></div>
+          <div class="card"><h3>Plants vs. Zombies 2</h3><p>Mobile</p><span class="tag">ختمتها</span></div>
+          <div class="card"><h3>EA Sports FC 26</h3><p>PC</p><span class="tag">ألعبها</span></div>
+          <div class="card"><h3>Euro Truck Simulator 2</h3><p>PC</p><span class="tag">ألعبها</span></div>
+          <div class="card"><h3>Forza Horizon</h3><p>PC</p><span class="tag">لعبتها</span></div>
+        </div>
+      </section>
+
+      <section id="anime" class="page">
+        <h2 class="section-title">الأنميات اللي شفتها</h2>
+        <div class="cards">
+          <div class="card anime-card">
+            <div class="anime-info">
+              <h3>Demon Slayer</h3>
+              <p>قاتل الشياطين</p>
+              <span class="tag">شاهدته</span>
+            </div>
+            <div class="anime-poster"><img src="assets/asset_05.webp" alt="Demon Slayer poster"></div>
+          </div>
+
+          <div class="card anime-card">
+            <div class="anime-info">
+              <h3>Lycoris Recoil</h3>
+              <p>ليكوريس ريكويل</p>
+              <span class="tag">شاهدته</span>
+            </div>
+            <div class="anime-poster"><img src="assets/asset_06.webp" alt="Lycoris Recoil poster"></div>
+          </div>
+
+          <div class="card anime-card">
+            <div class="anime-info">
+              <h3>Bocchi the Rock!</h3>
+              <p>بوتشي ذا روك</p>
+              <span class="tag">شاهدته</span>
+            </div>
+            <div class="anime-poster"><img src="assets/asset_07.webp" alt="Bocchi the Rock poster"></div>
+          </div>
+
+          <div class="card anime-card">
+            <div class="anime-info">
+              <h3>Frieren: Beyond Journey's End</h3>
+              <p>فريرين</p>
+              <span class="tag">شاهدته</span>
+            </div>
+            <div class="anime-poster"><img src="assets/asset_08.webp" alt="Frieren poster"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="sidebar">
+      <h3>القائمة</h3>
+      <button class="side-btn active" data-page="profiles">البروفايلات</button>
+      <button class="side-btn" data-page="games">الألعاب اللي لعبتها</button>
+      <button class="side-btn" data-page="anime">الأنميات اللي شفتها</button>
+      <button class="motion-btn" id="motionToggle">إيقاف / تشغيل الحركات</button>
+    </aside>
+  </div>
+
+  <footer>
+    <span>Ryo Personal Site</span>
+    <span>Light Blue • White</span>
+  </footer>
+</div>
+
+<script>
+const buttons = document.querySelectorAll('[data-page]');
+const pages = document.querySelectorAll('.page');
+
+function showPage(id) {
+  pages.forEach(p => p.classList.toggle('active', p.id === id));
+  buttons.forEach(b => b.classList.toggle('active', b.dataset.page === id));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => showPage(btn.dataset.page));
+});
+
+document.getElementById('motionToggle').addEventListener('click', () => {
+  document.body.classList.toggle('calm');
+});
+</script>
+</body>
+</html>
