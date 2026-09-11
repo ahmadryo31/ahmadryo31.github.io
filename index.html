@@ -10,13 +10,72 @@
 <title>Ryo — بروفايلاتي</title>
 <link href="assets/ryo-favicon.jpg" rel="icon" type="image/jpeg"/>
 <link href="assets/style.css" rel="stylesheet"/>
+<style>
+/* Active section marker: active section marker on the RIGHT */
+.sidebar nav a{position:relative}
+.sidebar nav a[aria-current="page"]::after{
+  content:"";
+  position:absolute;
+  right:-24px;
+  top:50%;
+  width:4px;
+  height:42px;
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:#3fb3f5;
+}
+@media(max-width:800px){
+  .sidebar nav a[aria-current="page"]::after{right:-24px}
+}
+</style>
+<style id="profile-screenshot-preview-style">
+/* Profile account screenshots */
+.profile-card{
+  flex-wrap:wrap;
+}
+.profile-card .profile-account-shot{
+  width:100%;
+  flex:0 0 100%;
+  margin-top:8px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  background:#f7fcff;
+  box-shadow:0 10px 26px rgba(63,179,245,.08);
+}
+.profile-card .profile-account-shot img{
+  width:100%;
+  height:240px;
+  object-fit:contain;
+  object-position:center;
+  background:#f7fcff;
+}
+.profile-card .profile-account-shot:hover{
+  border-color:#9edfff;
+}
+@media(max-width:560px){
+  .profile-card .profile-account-shot img{height:190px}
+}
+</style>
+<style id="anime-poster-fill-preview-style">
+/* Anime posters fill the whole card with no blue side edges */
+.poster{
+  background:transparent !important;
+}
+.poster img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
 <header class="mobile-header"><a class="wordmark" dir="ltr" href="#profiles">ryo</a><button aria-controls="sidebar" aria-expanded="false" aria-label="فتح القائمة" class="menu-button" type="button"><span></span><span></span></button></header>
 <div class="shell">
 <aside aria-label="القائمة الرئيسية" class="sidebar" id="sidebar">
-<a class="wordmark" dir="ltr" href="#profiles">ryo</a>
+
 <div class="side-identity"><img alt="" height="64" src="assets/ryo-sidebar.webp" width="64"/><div><strong dir="ltr">Ryo</strong></div></div>
 <p class="nav-caption">اكتشف عالمي</p>
 <nav>
@@ -53,6 +112,83 @@
 </main></div>
 <div class="toast" id="toast" role="status"></div>
 <noscript><p class="noscript">فعّل JavaScript للتنقّل بين الأقسام وعرض البروفايلات والألعاب.</p></noscript>
+<script src="assets/app.js"></script>
+<script id="profile-screenshot-preview-script">
+(() => {
+  const profileData = {"Instagram": {"username": "@ahmad.ryo_1", "description": "حسابي على Instagram", "url": "https://www.instagram.com/ahmad.ryo_1/", "profileImage": "assets/profile-instagram.jpg"}, "Roblox": {"username": "Ryo", "description": "حسابي على Roblox", "url": "https://www.roblox.com/users/3342868559/profile", "profileImage": "assets/profile-roblox.jpg"}, "Steam": {"username": "Ahmad_Ryo", "description": "حسابي على Steam", "url": "https://steamcommunity.com/profiles/76561199764646587/", "profileImage": "assets/profile-steam.jpg"}, "Discord": {"username": "Ryo", "description": "بروفايلي على Discord", "url": "https://discord.com/users/690206073873105073", "profileImage": "assets/profile-discord.jpg"}};
+  const cards = [...document.querySelectorAll('#profile-grid .profile-card')];
 
+  cards.forEach(card => {
+    const title = card.querySelector('.profile-detail h3');
+    if (!title) return;
+    const name = title.textContent.trim();
+    const info = profileData[name];
+    if (!info) return;
 
-<script src="assets/app.js"></script></body></html>
+    const detailText = card.querySelector('.profile-detail p');
+    if (detailText) {
+      if (name === 'Discord') detailText.textContent = 'بروفايلي على Discord';
+      else if (info.username) detailText.textContent = info.username;
+      else if (info.description) detailText.textContent = info.description;
+    }
+
+    let action = card.querySelector('.profile-action');
+    if (action) {
+      action.href = info.url;
+      action.target = '_blank';
+      action.rel = 'noopener noreferrer';
+      action.textContent = 'فتح الحساب';
+      action.setAttribute('aria-label', 'فتح الحساب — ' + name);
+    }
+
+    if (info.profileImage && !card.querySelector('.profile-account-shot')) {
+      const wrap = document.createElement('a');
+      wrap.className = 'profile-account-shot';
+      wrap.href = info.url;
+      wrap.target = '_blank';
+      wrap.rel = 'noopener noreferrer';
+      wrap.setAttribute('aria-label', 'فتح حساب ' + name);
+
+      const img = document.createElement('img');
+      img.src = info.profileImage;
+      img.alt = 'صورة بروفايل ' + name;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+
+      wrap.appendChild(img);
+      card.appendChild(wrap);
+    }
+  });
+})();
+</script>
+<script id="tomb-raider-links-preview-script">
+(() => {
+  const links = {
+    "Tomb Raider (2013)": "https://store.steampowered.com/app/203160/Tomb_Raider/",
+    "Rise of the Tomb Raider": "https://store.steampowered.com/app/391220/Rise_of_the_Tomb_Raider/",
+    "Shadow of the Tomb Raider": "https://store.steampowered.com/app/750920/Shadow_of_the_Tomb_Raider_Definitive_Edition/"
+  };
+
+  document.querySelectorAll('#game-grid .game-card').forEach(card => {
+    const title = card.querySelector('.game-title-panel h2');
+    if (!title) return;
+
+    const url = links[title.textContent.trim()];
+    if (!url) return;
+
+    let link = card.querySelector('.official-link');
+    if (!link) {
+      link = document.createElement('a');
+      link.className = 'official-link';
+      link.textContent = 'صفحة اللعبة الرسمية ↗';
+      card.querySelector('.game-info')?.appendChild(link);
+    }
+
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', 'صفحة ' + title.textContent.trim() + ' الرسمية');
+  });
+})();
+</script>
+</body></html>
