@@ -45,16 +45,17 @@
 }
 .profile-card .profile-account-shot img{
   width:100%;
-  height:240px;
+  height:auto;
   object-fit:contain;
   object-position:center;
   background:#f7fcff;
+  image-rendering:auto;
 }
 .profile-card .profile-account-shot:hover{
   border-color:#9edfff;
 }
 @media(max-width:560px){
-  .profile-card .profile-account-shot img{height:190px}
+  .profile-card .profile-account-shot img{height:auto}
 }
 </style>
 <style id="anime-poster-fill-preview-style">
@@ -115,7 +116,7 @@
 <script src="assets/app.js"></script>
 <script id="profile-screenshot-preview-script">
 (() => {
-  const profileData = {"Instagram": {"username": "@ahmad.ryo_1", "description": "حسابي على Instagram", "url": "https://www.instagram.com/ahmad.ryo_1/", "profileImage": "assets/profile-instagram.jpg"}, "Roblox": {"username": "Ryo", "description": "حسابي على Roblox", "url": "https://www.roblox.com/users/3342868559/profile", "profileImage": "assets/profile-roblox.jpg"}, "Steam": {"username": "Ahmad_Ryo", "description": "حسابي على Steam", "url": "https://steamcommunity.com/profiles/76561199764646587/", "profileImage": "assets/profile-steam.jpg"}, "Discord": {"username": "Ryo", "description": "بروفايلي على Discord", "url": "https://discord.com/users/690206073873105073", "profileImage": "assets/profile-discord.jpg"}};
+  const profileData = {"Instagram": {"username": "@ahmad.ryo_1", "description": "حسابي على Instagram", "url": "https://www.instagram.com/ahmad.ryo_1/", "profileImage": "assets/profile-instagram.avif"}, "Roblox": {"username": "Ryo", "description": "حسابي على Roblox", "url": "https://www.roblox.com/users/3342868559/profile", "profileImage": "assets/profile-roblox.avif"}, "Steam": {"username": "Ahmad_Ryo", "description": "حسابي على Steam", "url": "https://steamcommunity.com/profiles/76561199764646587/", "profileImage": "assets/profile-steam.avif"}, "Discord": {"username": "Ryo", "description": "بروفايلي على Discord", "url": "https://discord.com/users/690206073873105073", "profileImage": "assets/profile-discord.avif"}};
   const cards = [...document.querySelectorAll('#profile-grid .profile-card')];
 
   cards.forEach(card => {
